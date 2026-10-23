@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Bosho | البوشو</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff6e6;--card:#fff;--ink:#241608;--mute:#7a6650;--fire:#f28c1b;--ember:#c4411a;--line:#ecd9b8;--shadow:rgba(120,60,0,.18)}
+:root[data-theme=dark]{--bg:#16100a;--card:#231910;--ink:#fbeedb;--mute:#b79d7f;--line:#3a2a1a;--shadow:rgba(0,0,0,.6)}
+*{box-sizing:border-box;margin:0}
+body{font-family:Cairo,system-ui,sans-serif;background:var(--bg);color:var(--ink);transition:background .3s,color .3s;padding-bottom:90px}
+button{font:inherit;cursor:pointer;border:0;color:inherit;background:none}
+:focus-visible{outline:3px solid var(--fire);outline-offset:2px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.logo{font-family:Bungee,Cairo;font-size:1.4rem;color:var(--fire)}
+.tools{display:flex;gap:8px}
+.tools button{border:2px solid var(--line);border-radius:99px;padding:6px 14px;font-weight:800;background:var(--card)}
+.hero{display:grid;place-items:center;text-align:center;padding:36px 16px 24px;background:radial-gradient(circle at 50% 100%,var(--fire),transparent 70%)}
+.hero h1{font-family:Bungee,Cairo;font-size:clamp(2.4rem,9vw,5rem);color:var(--ink);line-height:1}
+.hero p{color:var(--mute);margin:8px 0 18px;font-weight:600}
+.scene{perspective:700px;width:120px;height:120px;margin:10px 0 40px}
+.cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:spin 14s linear infinite}
+.cube div{position:absolute;inset:0;display:grid;place-items:center;font-size:3.4rem;background:var(--card);border:3px solid var(--fire);border-radius:14px;box-shadow:inset 0 0 30px var(--shadow)}
+.cube div:nth-child(1){transform:translateZ(60px)}.cube div:nth-child(2){transform:rotateY(90deg) translateZ(60px)}
+.cube div:nth-child(3){transform:rotateY(180deg) translateZ(60px)}.cube div:nth-child(4){transform:rotateY(-90deg) translateZ(60px)}
+.cube div:nth-child(5){transform:rotateX(90deg) translateZ(60px)}.cube div:nth-child(6){transform:rotateX(-90deg) translateZ(60px)}
+@keyframes spin{from{transform:rotateX(-20deg) rotateY(0)}to{transform:rotateX(-20deg) rotateY(360deg)}}
+.info{font-weight:800;color:var(--ember)}
+nav.cats{display:flex;gap:8px;overflow-x:auto;padding:10px 14px;position:sticky;top:55px;z-index:15;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.cats a{white-space:nowrap;padding:6px 14px;border-radius:99px;background:var(--card);border:2px solid var(--line);font-weight:800;text-decoration:none;color:var(--ink);font-size:.9rem}
+nav.cats a:hover{border-color:var(--fire)}
+.search{display:block;margin:14px auto 0;width:min(92%,520px);padding:11px 16px;border-radius:99px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+main{max-width:1100px;margin:auto;padding:0 14px}
+section{padding-top:70px;margin-top:-40px}
+section h2{font-size:1.7rem;font-weight:900;margin:24px 0 14px;display:flex;gap:10px;align-items:center}
+section h2::after{content:"";flex:1;height:3px;background:linear-gradient(90deg,var(--fire),transparent);border-radius:9px}
+[dir=rtl] section h2::after{background:linear-gradient(270deg,var(--fire),transparent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;perspective:900px}
+.item{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px;transition:transform .15s,box-shadow .2s;transform-style:preserve-3d;box-shadow:0 6px 18px var(--shadow)}
+.item h3{font-size:1.05rem;font-weight:800;transform:translateZ(18px)}
+.item small{color:var(--mute);font-size:.8rem}
+.new{background:var(--ember);color:#fff;border-radius:6px;padding:0 6px;font-size:.7rem;margin-inline-start:6px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px;transform:translateZ(26px)}
+.price{font-weight:900;color:var(--ember);font-size:1.15rem}
+[data-theme=dark] .price{color:var(--fire)}
+.add{background:var(--fire);color:#241608;font-weight:900;border-radius:99px;padding:6px 16px}
+.add:active{transform:scale(.9)}
+.qty{display:flex;align-items:center;gap:8px;font-weight:900}
+.qty button{width:30px;height:30px;border-radius:50%;background:var(--fire);color:#241608;font-weight:900}
+.fab{position:fixed;bottom:16px;inset-inline:16px;max-width:520px;margin:auto;background:var(--ember);color:#fff;border-radius:99px;padding:14px 22px;font-weight:900;display:flex;justify-content:space-between;box-shadow:0 10px 30px var(--shadow);z-index:30;transition:transform .3s}
+.fab.hide{transform:translateY(150%)}
+.fab.pop{animation:pop .4s}
+@keyframes pop{50%{transform:scale(1.07) rotateX(12deg)}}
+.drawer{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40;display:none;align-items:flex-end;justify-content:center}
+.drawer.open{display:flex}
+.sheet{background:var(--bg);width:min(100%,560px);max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:20px;animation:up .35s cubic-bezier(.2,.9,.3,1)}
+@keyframes up{from{transform:translateY(60px) rotateX(25deg);opacity:0}}
+.sheet h2{font-weight:900;margin-bottom:10px;display:flex;justify-content:space-between}
+.line{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.line b{flex:1}
+.tot{display:flex;justify-content:space-between;font-weight:900;font-size:1.2rem;padding:12px 0}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.seg button{padding:10px;border-radius:12px;border:2px solid var(--line);font-weight:800;background:var(--card)}
+.seg button.on{border-color:var(--fire);background:var(--fire);color:#241608}
+.sheet input,.sheet textarea{width:100%;padding:11px;margin:5px 0;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.sheet input.bad{border-color:#d22}
+.loc{width:100%;padding:10px;border-radius:12px;border:2px dashed var(--fire);font-weight:800;margin:4px 0}
+.send{width:100%;padding:14px;border-radius:99px;background:#25d366;color:#08210f;font-weight:900;font-size:1.05rem;margin-top:10px}
+.msg{color:var(--mute);font-size:.85rem;text-align:center;margin-top:6px}
+.empty{text-align:center;color:var(--mute);padding:30px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="logo">EL BOSHO</div>
+  <div class="tools"><button id="tTheme" aria-label="theme">🌙</button><button id="tLang">EN</button></div>
+</header>
+<div class="hero">
+  <div class="scene"><div class="cube"><div>🔥</div><div>🍗</div><div>🌯</div><div>🧀</div><div>🥔</div><div>🍖</div></div></div>
+  <h1 data-t="brand">البوشو</h1>
+  <p data-t="tag"></p>
+  <div class="info" data-t="addr"></div>
+  <input class="search" id="q" data-ph="search">
+</div>
+<nav class="cats" id="nav"></nav>
+<main id="menu"></main>
+<button class="fab hide" id="fab"><span id="fabN"></span><span id="fabT"></span></button>
+
+<div class="drawer" id="dr"><div class="sheet" role="dialog">
+  <h2><span data-t="cart"></span><button id="x" aria-label="close">✕</button></h2>
+  <div id="lines"></div>
+  <div class="tot"><span data-t="total"></span><span id="tot"></span></div>
+  <div class="seg"><button id="mDel" class="on" data-t="delivery"></button><button id="mPick" data-t="pickup"></button></div>
+  <input id="name" data-ph="name" autocomplete="name">
+  <input id="phone" type="tel" inputmode="tel" data-ph="phone" autocomplete="tel">
+  <div id="delBox">
+    <textarea id="addr" rows="2" data-ph="address"></textarea>
+    <button class="loc" id="locBtn" data-t="shareLoc"></button>
+  </div>
+  <textarea id="note" rows="2" data-ph="note"></textarea>
+  <button class="send" id="send" data-t="send"></button>
+  <p class="msg" data-t="feeNote"></p>
+</div></div>
+
+<script>
+/* ===== SETTINGS: change the restaurant WhatsApp number here (country code, no + or 0) ===== */
+const WA_NUMBER = "201030304499";
+const CUR = {ar:"ج", en:"EGP"};
+
+/* ===== MENU DATA: [arabic, english, price, isNew?, description] ===== */
+const MENU = [
+ {id:"chk",ic:"🥪",ar:"ساندوتشات ماريه فراخ",en:"Chicken Sandwiches",i:[
+  ["استربس","Strips",115],["بانيه","Panee",115],["زنجر سبايسي","Spicy Zinger",120],["فاهيتا","Fajita",120],["فراي حاي","Fry Hai",120],["شيش طاووق مشوي","Grilled Shish Tawook",115],["مدور مشوية","Grilled Madawar",120],["تشيكن رانش","Chicken Ranch",115],["كوردن بلو","Cordon Bleu",115]]},
+ {id:"meat",ic:"🥙",ar:"ساندوتشات ماريه لحوم",en:"Meat Sandwiches",i:[
+  ["كفتة عالفحم","Charcoal Kofta",115],["سجق مشوي","Grilled Sausage",115],["هوت دوج","Hot Dog",115],["ميلانو","Milano",115],["فاهيتا لحم","Beef Fajita",115],["لحوم مدخنة","Smoked Meats",115]]},
+ {id:"meal",ic:"🍗",ar:"الوجبات",en:"Meals",i:[
+  ["فرخة مشوية عالفحم","Whole Charcoal Chicken",340,0,"رز بسمتي + بطاطس + صوصات + مخلل + خضار مشوي","Basmati rice, fries, sauces, pickles, grilled veg"],
+  ["نص فرخة مشوية عالفحم","Half Charcoal Chicken",190,0,"رز بسمتي + بطاطس + صوصات + مخلل + خضار مشوي","Basmati rice, fries, sauces, pickles, grilled veg"],
+  ["وجبة استربس","Strips Meal",180,0,"رز بسمتي + 7 قطع استربس + صوصات + بطاطس + مخلل","Basmati rice, 7 strips, sauces, fries, pickles"],
+  ["وجبة كفتة مشوية عالفحم","Charcoal Kofta Meal",180,0,"رز بسمتي + 6 صوابع كفتة + صوصات + بطاطس + مخلل","Basmati rice, 6 kofta fingers, sauces, fries, pickles"],
+  ["وجبة شيش مشوي عالفحم","Charcoal Shish Meal",180,0,"رز بسمتي + 6 قطع شيش + صوصات + بطاطس + مخلل","Basmati rice, 6 shish pieces, sauces, fries, pickles"],
+  ["وجبة ميكس مشاوي","Mixed Grill Meal",230,0,"رز + 3 كفتة + 3 شيش + 3 سجق + 2 مدور مشوية + صوصات + بطاطس + مخلل","Rice, 3 kofta, 3 shish, 3 sausage, 2 grilled madawar, sauces, fries, pickles"],
+  ["وجبة ميكس الأكيل","Mix El Akeel Meal",280,0,"رز + 3 كفتة + 3 شيش + 3 سجق + 3 استربس + 2 مدور مشوية + صوصات + بطاطس + مخلل","Rice, 3 kofta, 3 shish, 3 sausage, 3 strips, 2 madawar, sauces, fries, pickles"]]},
+ {id:"qd",ic:"🧀",ar:"كساديا",en:"Quesadilla",i:[
+  ["كساديا ميكس جبن","Mixed Cheese Quesadilla",90],["كساديا ميكس جبن بسطرمة","Cheese & Pastrami Quesadilla",110],["كساديا مرجريتا","Margherita Quesadilla",100],["كساديا تركي مدخن","Smoked Turkey Quesadilla",100],["كساديا سلامي مدخن","Smoked Salami Quesadilla",100],["كساديا كيري بسطرمة","Kiri Pastrami Quesadilla",110]]},
+ {id:"qdc",ic:"🍗",ar:"كساديا فراخ",en:"Chicken Quesadilla",i:[
+  ["كساديا استربس","Strips Quesadilla",120,1],["كساديا شيش","Shish Quesadilla",120,1],["كساديا زنجر","Zinger Quesadilla",120,1],["كساديا فاهيتا","Fajita Quesadilla",120,1],["كساديا مدور","Madawar Quesadilla",120,1],["كساديا كوردن بلو","Cordon Bleu Quesadilla",120,1]]},
+ {id:"qdm",ic:"🍖",ar:"كساديا لحوم",en:"Meat Quesadilla",i:[
+  ["كساديا كفتة","Kofta Quesadilla",110,1],["كساديا سجق","Sausage Quesadilla",110,1],["كساديا برجر","Burger Quesadilla",110,1],["كساديا هوت دوج","Hot Dog Quesadilla",110,1],["كساديا ميلانو","Milano Quesadilla",110,1],["كساديا سجق بسطرمة","Sausage & Pastrami Quesadilla",110,1]]},
+ {id:"qdx",ic:"🌮",ar:"كساديا ميكسات",en:"Quesadilla Mixes",i:[
+  ["كساديا ميكس لحوم","Meat Mix Quesadilla",140,1],["كساديا ميكس فراخ","Chicken Mix Quesadilla",140,1],["كساديا ميكس مشاوي","Grill Mix Quesadilla",140,1],["كساديا ميكس لحوم مدخنة","Smoked Meat Mix Quesadilla",140,1]]},
+ {id:"cc",ic:"🧈",ar:"كريبات الجبن",en:"Cheese Crepes",i:[
+  ["ميكس جبن","Mixed Cheese",110],["ميكس جبن بسطرمة","Cheese & Pastrami",130],["بسطرمة وتركي وسلامي","Pastrami, Turkey & Salami",140],["مرجريتا","Margherita",110],["شيدر ورومي","Cheddar & Roumy",110],["موزاريلا ورومي","Mozzarella & Roumy",110],["كيري بسطرمة","Kiri Pastrami",130]]},
+ {id:"cf",ic:"🌯",ar:"كريبات الفراخ",en:"Chicken Crepes",i:[
+  ["استربس","Strips",130],["بانيه","Panee",130],["زنجر سبايسي","Spicy Zinger",140],["فاهيتا","Fajita",140],["فراي داي","Fry Day",150],["شيش طاووق","Shish Tawook",150],["مشوي مدور","Grilled Madawar",160],["تشيكن رانش","Chicken Ranch",140],["تشيكن باربيكيو","Chicken BBQ",140],["كوردن بلو","Cordon Bleu",140],["بيكاتا فراخ","Chicken Piccata",160,1]]},
+ {id:"cm",ic:"🥩",ar:"كريبات اللحوم",en:"Meat Crepes",i:[
+  ["كفتة مشوية","Grilled Kofta",140],["سجق مشوي","Grilled Sausage",140],["برجر مشوي","Grilled Burger",140],["هوت دوج","Hot Dog",130],["ميلانو","Milano",130],["فاهيتا لحم","Beef Fajita",150],["بسطرمة سوسيس","Pastrami Sausage",130],["سجق بسطرمة","Sausage & Pastrami",140],["بيكاتا لحمه","Beef Piccata",170,1]]},
+ {id:"mx",ic:"💥",ar:"كريبات الميكسات",en:"Mix Crepes",i:[
+  ["ميكس فراخ","Chicken Mix",160,0,"شيش عالفحم + استربس + بانيه","Charcoal shish, strips, panee"],
+  ["ميكس لحوم","Meat Mix",160,0,"كفتة عالفحم + سجق + برجر + هوت دوج","Charcoal kofta, sausage, burger, hot dog"],
+  ["ميكس مشاوي","Grill Mix",180,0,"شيش + كفتة + برجر + سجق + مدور","Shish, kofta, burger, sausage, madawar"],
+  ["تربو لحوم","Turbo Meat",190,0,"كفتة + سلامي + سجق + بسطرمة + برجر","Kofta, salami, sausage, pastrami, burger"],
+  ["فاير تشيكن","Fire Chicken",190,0,"زنجر + تركي + هالبينو + كوردن بلو","Zinger, turkey, jalapeno, cordon bleu"],
+  ["فرايد ميكس","Fried Mix",190,0,"كوردن برجر + استربس + حلقات بصل + موزاريلا استيكس","Cordon burger, strips, onion rings, mozzarella sticks"],
+  ["دونر كباب","Doner Kebab",200,0,"استربس + دونر كباب + هوت دوج + تركي مدخن","Strips, doner kebab, hot dog, smoked turkey"],
+  ["الفخامة","El Fakhama",190,0,"كفتة مشوية + استربس + سلامي + صوابع موزاريلا","Grilled kofta, strips, salami, mozzarella fingers"],
+  ["دايموند","Diamond",190,0,"مسحب بانيه + شيش + مشروم مكرمل + كوردن بلو + تركي مدخن","Panee, shish, caramelized mushroom, cordon bleu, smoked turkey"],
+  ["فري ميكس","Free Mix",190,0,"شيش + كفتة + مدور + هوت دوج + بسطرمة","Shish, kofta, madawar, hot dog, pastrami"],
+  ["قنبلة فراخ","Chicken Bomb",220,0,"شيش + استربس + بانيه + مسحب + مدور + بطاطس","Shish, strips, panee, madawar, fries"],
+  ["قنبلة لحوم","Meat Bomb",220,0,"كفتة + سجق + برجر + بسطرمة + هوت دوج + بطاطس","Kofta, sausage, burger, pastrami, hot dog, fries"],
+  ["قنبلة البوشو","El Bosho Bomb",240,0,"شيش + استربس + بانيه + مسحب + هوت دوج + سلامي + تركي + بطاطس","Shish, strips, panee, hot dog, salami, turkey, fries"],
+  ["كريب بيكاتا ميكس","Piccata Mix Crepe",190,1,"بيكاتا بالمشروم والكريمة اللبنى + استربس + حلقات بصل + كوردن برجر","Piccata with mushroom & cream, strips, onion rings, cordon burger"],
+  ["كريب كباب وكفتة","Kebab & Kofta Crepe",180,1,"كباب بلدي مشوي + كفتة + الفحم + صوص البوشو","Grilled kebab, kofta, El Bosho sauce"],
+  ["كريب خطفوني","Khatfony Crepe",190,1,"سجق مشوي + كوردن برجر + تركي مدخن + كوردن بلو + برجر لحمة","Grilled sausage, cordon burger, smoked turkey, cordon bleu, beef burger"]]},
+ {id:"pt",ic:"🥔",ar:"البطاطس",en:"Potatoes",i:[
+  ["بطاطس بهارات","Spiced Fries",50],["بطاطس ميكس مومات","Mix Momat Fries",60],["بطاطس شيدر","Cheddar Fries",60],["بطاطس شيدر هالبينو","Cheddar Jalapeno Fries",70],["بطاطس مفروم","Minced Meat Fries",80],["بطاطس استربس","Strips Fries",90],["بطاطس هوت دوج","Hot Dog Fries",80],["بطاطس سجق","Sausage Fries",80],["بطاطس شيش","Shish Fries",90],["بطاطس مدور مشوية","Grilled Madawar Fries",90],["بطاطس ميكس جبن","Mixed Cheese Fries",80]]},
+ {id:"ex",ic:"➕",ar:"الإضافات",en:"Extras",i:[
+  ["الكونو","Cono",25],["موزاريلا استيكس","Mozzarella Sticks",20],["تركي أو سلامي","Turkey or Salami",20],["بسطرمة","Pastrami",20],["مشروم","Mushroom",15],["هالبينو","Jalapeno",15],["مومات","Momat",15]]}
+];
+
+const T={
+ ar:{brand:"البوشو",tag:"كريب ومشويات",addr:"قشلاق السواحل - أمام حديقة الأمل - بجوار كافيه 2WIX",search:"ابحث في المنيو...",add:"أضف",cart:"سلة الطلبات",total:"الإجمالي",delivery:"🛵 توصيل",pickup:"🏃 استلام من المطعم",name:"الاسم",phone:"رقم الموبايل",address:"العنوان بالتفصيل",note:"ملاحظات (اختياري)",shareLoc:"📍 شارك موقعي الحالي",send:"إرسال الطلب على واتساب",view:"عرض السلة",items:"صنف",feeNote:"رسوم التوصيل يحددها المطعم عند التأكيد.",empty:"السلة فارغة. اختر أصنافك من المنيو.",locOk:"✅ تم تحديد الموقع",locErr:"تعذر تحديد الموقع، اكتب العنوان بدل ذلك.",badPhone:"اكتب رقم موبايل صحيح",need:"الاسم والعنوان مطلوبان",new:"جديد"},
+ en:{brand:"EL BOSHO",tag:"Crepes & Grills",addr:"Qeshlaq El Sawahel, in front of Al Amal Park, next to 2WIX Cafe",search:"Search the menu...",add:"Add",cart:"Your order",total:"Total",delivery:"🛵 Delivery",pickup:"🏃 Pick up",name:"Name",phone:"Mobile number",address:"Full address",note:"Notes (optional)",shareLoc:"📍 Share my current location",send:"Send order on WhatsApp",view:"View cart",items:"items",feeNote:"The restaurant sets the delivery fee when confirming.",empty:"Your cart is empty. Pick something from the menu.",locOk:"✅ Location saved",locErr:"Could not get your location. Type your address instead.",badPhone:"Enter a valid mobile number",need:"Name and address are required",new:"NEW"}
+};
+const $=s=>document.querySelector(s);
+let lang=localStorage.lang||"ar", theme=localStorage.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+let cart=JSON.parse(localStorage.cart||"{}"), mode="del", loc=null, filter="";
+const t=k=>T[lang][k], nm=x=>lang==="ar"?x[0]:x[1], ds=x=>lang==="ar"?x[4]:x[5];
+const flat={}; MENU.forEach(c=>c.i.forEach((x,n)=>flat[c.id+n]=x));
+const sum=()=>Object.entries(cart).reduce((s,[k,q])=>s+flat[k][2]*q,0);
+const cnt=()=>Object.values(cart).reduce((a,b)=>a+b,0);
+const fmt=n=>n+" "+CUR[lang];
+
+function render(){
+  document.documentElement.lang=lang; document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  document.documentElement.dataset.theme=theme;
+  $("#tTheme").textContent=theme==="dark"?"☀️":"🌙"; $("#tLang").textContent=lang==="ar"?"EN":"عربي";
+  document.querySelectorAll("[data-t]").forEach(e=>e.textContent=t(e.dataset.t));
+  document.querySelectorAll("[data-ph]").forEach(e=>e.placeholder=t(e.dataset.ph));
+  $("#nav").innerHTML=MENU.map(c=>`<a href="#${c.id}">${c.ic} ${c[lang]}</a>`).join("");
+  const f=filter.trim().toLowerCase();
+  $("#menu").innerHTML=MENU.map(c=>{
+    const its=c.i.map((x,n)=>[x,n]).filter(([x])=>!f||x[0].includes(f)||x[1].toLowerCase().includes(f));
+    if(!its.length)return"";
+    return `<section id="${c.id}"><h2>${c.ic} ${c[lang]}</h2><div class="grid">${its.map(([x,n])=>{
+      const k=c.id+n,q=cart[k]||0;
+      return `<div class="item"><h3>${nm(x)}${x[3]?`<span class="new">${t("new")}</span>`:""}</h3>${ds(x)?`<small>${ds(x)}</small>`:""}
+      <div class="row"><span class="price">${fmt(x[2])}</span>${q?`<span class="qty"><button data-d="-1" data-k="${k}">−</button>${q}<button data-d="1" data-k="${k}">+</button></span>`:`<button class="add" data-d="1" data-k="${k}">${t("add")}</button>`}</div></div>`}).join("")}</div></section>`}).join("")||`<p class="empty">—</p>`;
+  bar(); lines();
+}
+function bar(pop){
+  const n=cnt(); $("#fab").classList.toggle("hide",!n);
+  $("#fabN").textContent=`🛒 ${t("view")} (${n} ${t("items")})`; $("#fabT").textContent=fmt(sum());
+  if(pop){$("#fab").classList.remove("pop");void $("#fab").offsetWidth;$("#fab").classList.add("pop")}
+}
+function lines(){
+  const e=Object.entries(cart);
+  $("#lines").innerHTML=e.length?e.map(([k,q])=>`<div class="line"><b>${nm(flat[k])}</b><span class="qty"><button data-d="-1" data-k="${k}">−</button>${q}<button data-d="1" data-k="${k}">+</button></span><span>${fmt(flat[k][2]*q)}</span></div>`).join(""):`<p class="empty">${t("empty")}</p>`;
+  $("#tot").textContent=fmt(sum());
+}
+function change(k,d){
+  cart[k]=(cart[k]||0)+d; if(cart[k]<=0)delete cart[k];
+  localStorage.cart=JSON.stringify(cart); render(); bar(d>0);
+  if(!cnt())$("#dr").classList.remove("open");
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-k]"); if(b)change(b.dataset.k,+b.dataset.d);
+});
+$("#q").addEventListener("input",e=>{filter=e.target.value;render()});
+$("#tTheme").onclick=()=>{theme=theme==="dark"?"light":"dark";localStorage.theme=theme;render()};
+$("#tLang").onclick=()=>{lang=lang==="ar"?"en":"ar";localStorage.lang=lang;render()};
+$("#fab").onclick=()=>$("#dr").classList.add("open");
+$("#x").onclick=()=>$("#dr").classList.remove("open");
+$("#dr").onclick=e=>{if(e.target.id==="dr")$("#dr").classList.remove("open")};
+function setMode(m){mode=m;$("#mDel").classList.toggle("on",m==="del");$("#mPick").classList.toggle("on",m==="pick");$("#delBox").style.display=m==="del"?"block":"none"}
+$("#mDel").onclick=()=>setMode("del"); $("#mPick").onclick=()=>setMode("pick");
+$("#locBtn").onclick=()=>{
+  navigator.geolocation?navigator.geolocation.getCurrentPosition(p=>{loc=`https://maps.google.com/?q=${p.coords.latitude},${p.coords.longitude}`;$("#locBtn").textContent=t("locOk")},()=>alert(t("locErr")),{enableHighAccuracy:true,timeout:10000}):alert(t("locErr"));
+};
+$("#send").onclick=()=>{
+  const name=$("#name").value.trim(), phone=$("#phone").value.replace(/[\s-]/g,""), addr=$("#addr").value.trim();
+  $("#phone").classList.toggle("bad",!/^(\+?20|0)?1[0-25]\d{8}$/.test(phone)&&!/^\+?\d{9,15}$/.test(phone));
+  if(!cnt())return;
+  if($("#phone").classList.contains("bad"))return alert(t("badPhone"));
+  if(!name||(mode==="del"&&!addr&&!loc))return alert(t("need"));
+  // The order message is always in Arabic so the restaurant can read it
+  let m=`*طلب جديد - البوشو*\n\n`;
+  Object.entries(cart).forEach(([k,q])=>m+=`• ${flat[k][0]} × ${q} = ${flat[k][2]*q} ج\n`);
+  m+=`\n*الإجمالي: ${sum()} ج* (بدون رسوم التوصيل)\n\n`;
+  m+=`الاسم: ${name}\nالموبايل: ${phone}\nنوع الطلب: ${mode==="del"?"توصيل":"استلام من المطعم"}\n`;
+  if(mode==="del"){if(addr)m+=`العنوان: ${addr}\n`;if(loc)m+=`الموقع: ${loc}\n`}
+  const note=$("#note").value.trim(); if(note)m+=`ملاحظات: ${note}\n`;
+  open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(m)}`,"_blank");
+};
+/* 3D tilt on cards (mouse only) */
+document.addEventListener("mousemove",e=>{
+  const c=e.target.closest(".item"); document.querySelectorAll(".item").forEach(i=>{if(i!==c)i.style.transform=""});
+  if(!c)return; const r=c.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  c.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg) translateZ(8px)`;
+});
+render(); setMode("del");
+</script>
+</body>
+</html>
