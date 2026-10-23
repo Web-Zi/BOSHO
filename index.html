@@ -20,13 +20,82 @@ header.top{display:flex;justify-content:space-between;align-items:center;padding
 .hero{display:grid;place-items:center;text-align:center;padding:36px 16px 24px;background:radial-gradient(circle at 50% 100%,var(--fire),transparent 70%)}
 .hero h1{font-family:Bungee,Cairo;font-size:clamp(2.4rem,9vw,5rem);color:var(--ink);line-height:1}
 .hero p{color:var(--mute);margin:8px 0 18px;font-weight:600}
-.scene{perspective:700px;width:120px;height:120px;margin:10px 0 40px}
-.cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:spin 14s linear infinite}
-.cube div{position:absolute;inset:0;display:grid;place-items:center;font-size:3.4rem;background:var(--card);border:3px solid var(--fire);border-radius:14px;box-shadow:inset 0 0 30px var(--shadow)}
-.cube div:nth-child(1){transform:translateZ(60px)}.cube div:nth-child(2){transform:rotateY(90deg) translateZ(60px)}
-.cube div:nth-child(3){transform:rotateY(180deg) translateZ(60px)}.cube div:nth-child(4){transform:rotateY(-90deg) translateZ(60px)}
-.cube div:nth-child(5){transform:rotateX(90deg) translateZ(60px)}.cube div:nth-child(6){transform:rotateX(-90deg) translateZ(60px)}
-@keyframes spin{from{transform:rotateX(-20deg) rotateY(0)}to{transform:rotateX(-20deg) rotateY(360deg)}}
+
+/* ================= 3D PROFESSIONAL CUBE STYLES ================= */
+.scene{perspective:1000px;width:140px;height:140px;margin:20px 0 45px;position:relative}
+.cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:spin 16s cubic-bezier(0.4, 0, 0.2, 1) infinite}
+.cube div.face{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,246,230,0.85));
+  border:1.5px solid rgba(242,140,27,0.5);
+  border-radius:18px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08), inset 0 0 20px rgba(242,140,27,0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  user-select:none;
+}
+[data-theme=dark] .cube div.face{
+  background: linear-gradient(135deg, rgba(35,25,16,0.95), rgba(22,16,10,0.85));
+  border:1.5px solid rgba(242,140,27,0.4);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4), inset 0 0 20px rgba(242,140,27,0.1);
+}
+.cube .sticker-icon{
+  width:46px;
+  height:46px;
+  fill:var(--fire);
+  filter: drop-shadow(0 4px 6px rgba(196,65,26,0.25));
+  transition: transform .3s;
+}
+.cube .sticker-label{
+  font-size:0.72rem;
+  font-weight:900;
+  letter-spacing:0.5px;
+  color:var(--ember);
+  text-transform:uppercase;
+  font-family: Cairo, sans-serif;
+}
+[data-theme=dark] .cube .sticker-label{
+  color:var(--fire);
+}
+
+/* Cube Face Positioning */
+.cube div:nth-child(1){transform:translateZ(70px)}
+.cube div:nth-child(2){transform:rotateY(90deg) translateZ(70px)}
+.cube div:nth-child(3){transform:rotateY(180deg) translateZ(70px)}
+.cube div:nth-child(4){transform:rotateY(-90deg) translateZ(70px)}
+.cube div:nth-child(5){transform:rotateX(90deg) translateZ(70px)}
+.cube div:nth-child(6){transform:rotateX(-90deg) translateZ(70px)}
+
+/* Ambient Dynamic Floor Shadow */
+.scene::after{
+  content:"";
+  position:absolute;
+  bottom:-25px;
+  left:10%;
+  width:80%;
+  height:20px;
+  background:radial-gradient(ellipse at center, rgba(196,65,26,0.35) 0%, transparent 75%);
+  border-radius:50%;
+  animation:shadowPulse 16s ease-in-out infinite;
+  z-index:-1;
+}
+
+@keyframes spin{
+  0%{transform:rotateX(-18deg) rotateY(0deg)}
+  100%{transform:rotateX(-18deg) rotateY(360deg)}
+}
+@keyframes shadowPulse{
+  0%, 100%{transform:scale(1); opacity:0.8}
+  50%{transform:scale(0.85); opacity:0.5}
+}
+/* =============================================================== */
+
 .info{font-weight:800;color:var(--ember)}
 nav.cats{display:flex;gap:8px;overflow-x:auto;padding:10px 14px;position:sticky;top:55px;z-index:15;background:var(--bg);border-bottom:1px solid var(--line)}
 nav.cats a{white-space:nowrap;padding:6px 14px;border-radius:99px;background:var(--card);border:2px solid var(--line);font-weight:800;text-decoration:none;color:var(--ink);font-size:.9rem}
@@ -35,7 +104,7 @@ nav.cats a:hover{border-color:var(--fire)}
 main{max-width:1100px;margin:auto;padding:0 14px}
 section{padding-top:70px;margin-top:-40px}
 section h2{font-size:1.7rem;font-weight:900;margin:24px 0 14px;display:flex;gap:10px;align-items:center}
-section h2::after{content:"";flex:1;height:3px;background:linear-gradient(90deg,var(--fire),transparent);border-radius:9px}
+section h2::after{content:"";flex:1;height:3px;background:linear-gradient(90deg,var(--fire),transparent);border-radius:99px}
 [dir=rtl] section h2::after{background:linear-gradient(270deg,var(--fire),transparent)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;perspective:900px}
 .item{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px;transition:transform .15s,box-shadow .2s;transform-style:preserve-3d;box-shadow:0 6px 18px var(--shadow)}
@@ -79,7 +148,42 @@ section h2::after{content:"";flex:1;height:3px;background:linear-gradient(90deg,
   <div class="tools"><button id="tTheme" aria-label="theme">🌙</button><button id="tLang">EN</button></div>
 </header>
 <div class="hero">
-  <div class="scene"><div class="cube"><div>🔥</div><div>🍗</div><div>🌯</div><div>🧀</div><div>🥔</div><div>🍖</div></div></div>
+  <!-- PROFESSIONAL 3D CUBE -->
+  <div class="scene">
+    <div class="cube">
+      <!-- Front: Flame / Brand Logo -->
+      <div class="face">
+        <svg class="sticker-icon" viewBox="0 0 24 24"><path d="M12 23c-4.97 0-9-3.58-9-8 0-4.19 3.88-8.92 7.74-12.75a1.73 1.73 0 0 1 2.52 0C17.12 6.08 21 10.81 21 15c0 4.42-4.03 8-9 8zm0-18.06C8.82 8.16 5 12.24 5 15c0 3.31 3.13 6 7 6s7-2.69 7-6c0-2.76-3.82-6.84-7-10.06z"/></svg>
+        <span class="sticker-label">البوشو</span>
+      </div>
+      <!-- Right: Grill / BBQ -->
+      <div class="face">
+        <svg class="sticker-icon" viewBox="0 0 24 24"><path d="M20.84 5.25L19 3.41c-.68-.68-1.79-.68-2.47 0L14 5.94l3.96 3.96 2.88-2.88c.68-.68.68-1.79 0-2.47zm-8.31 2.12l-7.9 7.9c-.39.39-.39 1.02 0 1.41l2.12 2.12c.39.39 1.02.39 1.41 0l7.9-7.9-3.53-3.53zM3 21h4v-2H3v2z"/></svg>
+        <span class="sticker-label">مشويات</span>
+      </div>
+      <!-- Back: Burger / Sandwiches -->
+      <div class="face">
+        <svg class="sticker-icon" viewBox="0 0 24 24"><path d="M19 10c0-3.87-3.13-7-7-7S5 6.13 5 10h14zm-1 3H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1zm1 4H5c-.55 0-1 .45-1 1v1c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-1c0-.55-.45-1-1-1z"/></svg>
+        <span class="sticker-label">برجر</span>
+      </div>
+      <!-- Left: Crepe / Wrap -->
+      <div class="face">
+        <svg class="sticker-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 13v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        <span class="sticker-label">كريب</span>
+      </div>
+      <!-- Top: Fries -->
+      <div class="face">
+        <svg class="sticker-icon" viewBox="0 0 24 24"><path d="M6 9l1 12h10l1-12H6zm3 10H8v-8h1v8zm3 0h-1v-8h1v8zm3 0h-1v-8h1v8zm1-12H7L6.2 3h11.6L17 7z"/></svg>
+        <span class="sticker-label">بطاطس</span>
+      </div>
+      <!-- Bottom: Drinks / Refreshing -->
+      <div class="face">
+        <svg class="sticker-icon" viewBox="0 0 24 24"><path d="M12 2c-5.33 0-8 3.25-8 7 0 2.42 1.16 4.54 3 5.8v5.2c0 .55.45 1 1 1h8c.55 0 1-.45 1-1v-5.2c1.84-1.26 3-3.38 3-5.8 0-3.75-2.67-7-8-7zm0 11c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>
+        <span class="sticker-label">مشروبات</span>
+      </div>
+    </div>
+  </div>
+
   <h1 data-t="brand">البوشو</h1>
   <p data-t="tag"></p>
   <div class="info" data-t="addr"></div>
@@ -106,8 +210,8 @@ section h2::after{content:"";flex:1;height:3px;background:linear-gradient(90deg,
 </div></div>
 
 <script>
-/* ===== SETTINGS: change the restaurant WhatsApp number here (country code, no + or 0) ===== */
-const WA_NUMBER = "201030304499";
+/* ===== SETTINGS: WhatsApp receiver number updated here ===== */
+const WA_NUMBER = "201555137386";
 const CUR = {ar:"ج", en:"EGP"};
 
 /* ===== MENU DATA: [arabic, english, price, isNew?, description] ===== */
