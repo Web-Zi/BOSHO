@@ -409,10 +409,19 @@ document.getElementById("checkout-form").addEventListener("submit",function(e){
     "يرجى تأكيد الطلب والتكلفة النهائية."
   ].filter(Boolean).join("\n");
 
-  window.open(
-    `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`,
-    "_blank","noopener"
-  );
+  const whatsappUrl =
+  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+const whatsappWindow = window.open(
+  whatsappUrl,
+  "_blank"
+);
+
+if (whatsappWindow) {
+  cart = {};
+  renderCart();
+  document.getElementById("checkout-form").reset();
+}
 });
 
 document.getElementById("year").textContent=new Date().getFullYear();
