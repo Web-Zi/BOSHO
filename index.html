@@ -1,433 +1,248 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#15120f">
-<meta name="description" content="منيو البوشو - مشويات ووجبات وساندوتشات. اطلب الآن عبر واتساب.">
-<title>EL BOSHO | البوشو</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Bosho | البوشو</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#15120f;
-  --panel:rgba(39,34,29,.88);
-  --orange:#ffad4a;
-  --cream:#fff0d8;
-  --muted:#c7b9a7;
-  --line:rgba(255,173,74,.25);
-}
-*{box-sizing:border-box}
-body{
-  margin:0;background:
-  radial-gradient(ellipse at 10% 15%,#392417 0,transparent 40%),
-  radial-gradient(ellipse at 90% 85%,#352016 0,transparent 40%),var(--bg);
-  color:var(--cream);font-family:Tahoma,Arial,sans-serif;
-}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-a{color:var(--orange)}
-header{
-  position:sticky;top:0;z-index:10;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;padding:12px 5%;background:#15120fee;
-  border-bottom:1px solid var(--line);backdrop-filter:blur(18px);
-}
-.brand{display:flex;align-items:center;gap:12px}
-.brand img{width:64px;height:64px;object-fit:contain;border-radius:12px}
-.brand h1{margin:0;color:var(--orange);font-size:22px}
-.brand p{margin:5px 0 0;font-size:12px;color:var(--muted)}
-.header-actions{display:flex;gap:8px}
-.btn{
-  border:0;border-radius:12px;padding:12px 16px;
-  background:var(--orange);color:#24170b;font-weight:bold;
-}
-.btn.secondary{background:#ffffff12;color:var(--cream);border:1px solid var(--line)}
-.hero{
-  max-width:1400px;margin:auto;padding:35px 5% 20px;
-}
-.hero-box{
-  border:1px solid var(--line);border-radius:26px;padding:30px;
-  background:linear-gradient(120deg,#ffad4a22,#211a14dd);
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
-  overflow:hidden;
-}
-.hero h2{font-size:clamp(30px,5vw,55px);margin:0 0 12px}
-.hero h2 span{color:var(--orange)}
-.hero p{color:var(--muted);line-height:1.9}
-.hero img{width:150px;max-height:175px;object-fit:contain}
-.wrap{max-width:1400px;margin:auto;padding:10px 5% 60px}
-.toolbar{display:flex;gap:10px;margin:15px 0;flex-wrap:wrap}
-#search{
-  flex:1;min-width:180px;padding:14px 16px;border-radius:12px;
-  border:1px solid var(--line);background:#ffffff0b;color:white;outline:none;
-}
-.categories{display:flex;gap:9px;overflow-x:auto;padding:10px 0 18px}
-.category{
-  flex-shrink:0;padding:10px 17px;border-radius:30px;
-  color:var(--cream);background:#ffffff09;border:1px solid var(--line);
-}
-.category.active{background:var(--orange);color:#24170b;border-color:var(--orange)}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:22px;align-items:start}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin:18px 0}
-.section-title h2{font-size:22px;margin:0}
-.section-title span{color:var(--muted);font-size:12px}
-.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.product{
-  background:var(--panel);border:1px solid var(--line);border-radius:18px;
-  padding:16px;transition:.2s;min-width:0;
-}
-.product:hover{transform:translateY(-3px);border-color:var(--orange)}
-.food-icon{
-  height:92px;display:grid;place-items:center;font-size:45px;
-  border-radius:13px;background:linear-gradient(135deg,#ffad4a1d,#ffffff05);
-  margin-bottom:13px;
-}
-.product h3{font-size:16px;margin:0 0 8px}
-.product .desc{color:var(--muted);font-size:12px;line-height:1.7;min-height:20px}
-.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px}
-.price{color:var(--orange);font-weight:bold;white-space:nowrap}
-.add{
-  width:38px;height:38px;border:0;border-radius:11px;
-  background:var(--orange);color:#25170b;font-size:23px;font-weight:bold;
-}
-.cart{
-  position:sticky;top:100px;background:var(--panel);
-  border:1px solid var(--line);border-radius:20px;padding:20px;
-}
-.cart h2{margin:0 0 18px}
-.cart-items{display:grid;gap:12px;max-height:340px;overflow:auto}
-.cart-item{padding:12px 0;border-bottom:1px solid var(--line)}
-.cart-item-top{display:flex;justify-content:space-between;gap:8px}
-.cart-item-name{font-size:14px;font-weight:bold}
-.remove{border:0;background:none;color:#ff8b72}
-.qty{display:flex;align-items:center;gap:12px;margin-top:10px}
-.qty button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:#ffffff0c;color:white}
-.empty{text-align:center;color:var(--muted);padding:24px 0;line-height:2}
-.totals{margin:18px 0;display:grid;gap:12px}
-.total-row{display:flex;justify-content:space-between;gap:10px}
-.total-row.final{border-top:1px solid var(--line);padding-top:15px;font-weight:bold;font-size:18px}
-.cart .btn{width:100%;margin-top:8px}
-.field{width:100%;padding:12px;margin-top:10px;border:1px solid var(--line);border-radius:10px;background:#ffffff09;color:white}
-textarea.field{resize:vertical}
-footer{text-align:center;border-top:1px solid var(--line);padding:30px 15px;color:var(--muted);line-height:2}
-footer strong{color:var(--orange)}
-.hidden{display:none!important}
-.notice{font-size:12px;color:var(--muted);line-height:1.8;margin-top:12px}
-@media(max-width:950px){
-  .layout{grid-template-columns:1fr}
-  .cart{position:static}
-  .products{grid-template-columns:repeat(3,minmax(0,1fr))}
-}
-@media(max-width:600px){
-  header{padding:10px 4%}
-  .brand img{width:49px;height:49px}
-  .brand h1{font-size:17px}
-  .brand p{font-size:10px}
-  .header-actions .secondary{display:none}
-  .hero{padding:22px 4% 12px}
-  .hero-box{padding:22px 17px}
-  .hero img{width:85px}
-  .hero p{font-size:13px}
-  .wrap{padding:10px 4% 35px}
-  .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .product{padding:11px;border-radius:14px}
-  .product h3{font-size:14px}
-  .food-icon{height:75px;font-size:37px}
-  .product-bottom{gap:5px}
-  .price{font-size:13px}
-  .add{width:34px;height:34px}
-}
+:root{--bg:#fff6e6;--card:#fff;--ink:#241608;--mute:#7a6650;--fire:#f28c1b;--ember:#c4411a;--line:#ecd9b8;--shadow:rgba(120,60,0,.18)}
+:root[data-theme=dark]{--bg:#16100a;--card:#231910;--ink:#fbeedb;--mute:#b79d7f;--line:#3a2a1a;--shadow:rgba(0,0,0,.6)}
+*{box-sizing:border-box;margin:0}
+body{font-family:Cairo,system-ui,sans-serif;background:var(--bg);color:var(--ink);transition:background .3s,color .3s;padding-bottom:90px}
+button{font:inherit;cursor:pointer;border:0;color:inherit;background:none}
+:focus-visible{outline:3px solid var(--fire);outline-offset:2px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.logo{font-family:Bungee,Cairo;font-size:1.4rem;color:var(--fire)}
+.tools{display:flex;gap:8px}
+.tools button{border:2px solid var(--line);border-radius:99px;padding:6px 14px;font-weight:800;background:var(--card)}
+.hero{display:grid;place-items:center;text-align:center;padding:36px 16px 24px;background:radial-gradient(circle at 50% 100%,var(--fire),transparent 70%)}
+.hero h1{font-family:Bungee,Cairo;font-size:clamp(2.4rem,9vw,5rem);color:var(--ink);line-height:1}
+.hero p{color:var(--mute);margin:8px 0 18px;font-weight:600}
+.scene{perspective:700px;width:120px;height:120px;margin:10px 0 40px}
+.cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:spin 14s linear infinite}
+.cube div{position:absolute;inset:0;display:grid;place-items:center;font-size:3.4rem;background:var(--card);border:3px solid var(--fire);border-radius:14px;box-shadow:inset 0 0 30px var(--shadow)}
+.cube div:nth-child(1){transform:translateZ(60px)}.cube div:nth-child(2){transform:rotateY(90deg) translateZ(60px)}
+.cube div:nth-child(3){transform:rotateY(180deg) translateZ(60px)}.cube div:nth-child(4){transform:rotateY(-90deg) translateZ(60px)}
+.cube div:nth-child(5){transform:rotateX(90deg) translateZ(60px)}.cube div:nth-child(6){transform:rotateX(-90deg) translateZ(60px)}
+@keyframes spin{from{transform:rotateX(-20deg) rotateY(0)}to{transform:rotateX(-20deg) rotateY(360deg)}}
+.info{font-weight:800;color:var(--ember)}
+nav.cats{display:flex;gap:8px;overflow-x:auto;padding:10px 14px;position:sticky;top:55px;z-index:15;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.cats a{white-space:nowrap;padding:6px 14px;border-radius:99px;background:var(--card);border:2px solid var(--line);font-weight:800;text-decoration:none;color:var(--ink);font-size:.9rem}
+nav.cats a:hover{border-color:var(--fire)}
+.search{display:block;margin:14px auto 0;width:min(92%,520px);padding:11px 16px;border-radius:99px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+main{max-width:1100px;margin:auto;padding:0 14px}
+section{padding-top:70px;margin-top:-40px}
+section h2{font-size:1.7rem;font-weight:900;margin:24px 0 14px;display:flex;gap:10px;align-items:center}
+section h2::after{content:"";flex:1;height:3px;background:linear-gradient(90deg,var(--fire),transparent);border-radius:9px}
+[dir=rtl] section h2::after{background:linear-gradient(270deg,var(--fire),transparent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;perspective:900px}
+.item{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px;transition:transform .15s,box-shadow .2s;transform-style:preserve-3d;box-shadow:0 6px 18px var(--shadow)}
+.item h3{font-size:1.05rem;font-weight:800;transform:translateZ(18px)}
+.item small{color:var(--mute);font-size:.8rem}
+.new{background:var(--ember);color:#fff;border-radius:6px;padding:0 6px;font-size:.7rem;margin-inline-start:6px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px;transform:translateZ(26px)}
+.price{font-weight:900;color:var(--ember);font-size:1.15rem}
+[data-theme=dark] .price{color:var(--fire)}
+.add{background:var(--fire);color:#241608;font-weight:900;border-radius:99px;padding:6px 16px}
+.add:active{transform:scale(.9)}
+.qty{display:flex;align-items:center;gap:8px;font-weight:900}
+.qty button{width:30px;height:30px;border-radius:50%;background:var(--fire);color:#241608;font-weight:900}
+.fab{position:fixed;bottom:16px;inset-inline:16px;max-width:520px;margin:auto;background:var(--ember);color:#fff;border-radius:99px;padding:14px 22px;font-weight:900;display:flex;justify-content:space-between;box-shadow:0 10px 30px var(--shadow);z-index:30;transition:transform .3s}
+.fab.hide{transform:translateY(150%)}
+.fab.pop{animation:pop .4s}
+@keyframes pop{50%{transform:scale(1.07) rotateX(12deg)}}
+.drawer{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40;display:none;align-items:flex-end;justify-content:center}
+.drawer.open{display:flex}
+.sheet{background:var(--bg);width:min(100%,560px);max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:20px;animation:up .35s cubic-bezier(.2,.9,.3,1)}
+@keyframes up{from{transform:translateY(60px) rotateX(25deg);opacity:0}}
+.sheet h2{font-weight:900;margin-bottom:10px;display:flex;justify-content:space-between}
+.line{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.line b{flex:1}
+.tot{display:flex;justify-content:space-between;font-weight:900;font-size:1.2rem;padding:12px 0}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.seg button{padding:10px;border-radius:12px;border:2px solid var(--line);font-weight:800;background:var(--card)}
+.seg button.on{border-color:var(--fire);background:var(--fire);color:#241608}
+.sheet input,.sheet textarea{width:100%;padding:11px;margin:5px 0;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.sheet input.bad{border-color:#d22}
+.loc{width:100%;padding:10px;border-radius:12px;border:2px dashed var(--fire);font-weight:800;margin:4px 0}
+.send{width:100%;padding:14px;border-radius:99px;background:#25d366;color:#08210f;font-weight:900;font-size:1.05rem;margin-top:10px}
+.msg{color:var(--mute);font-size:.85rem;text-align:center;margin-top:6px}
+.empty{text-align:center;color:var(--mute);padding:30px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="brand">
-    <img src="logo.png" alt="شعار البوشو"
-         onerror="this.style.display='none'">
-    <div>
-      <h1>EL BOSHO | البوشو</h1>
-      <p>طعم مميز • جودة تستحق التجربة</p>
-    </div>
-  </div>
-  <div class="header-actions">
-    <a class="btn secondary" href="https://www.facebook.com/share/1Lss34KGyG/"
-       target="_blank" rel="noopener">فيسبوك ↗</a>
-    <button class="btn" onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">
-      🛒 <span id="cart-count">0</span>
-    </button>
-  </div>
+<header class="top">
+  <div class="logo">EL BOSHO</div>
+  <div class="tools"><button id="tTheme" aria-label="theme">🌙</button><button id="tLang">EN</button></div>
 </header>
+<div class="hero">
+  <div class="scene"><div class="cube"><div>🔥</div><div>🍗</div><div>🌯</div><div>🧀</div><div>🥔</div><div>🍖</div></div></div>
+  <h1 data-t="brand">البوشو</h1>
+  <p data-t="tag"></p>
+  <div class="info" data-t="addr"></div>
+  <input class="search" id="q" data-ph="search">
+</div>
+<nav class="cats" id="nav"></nav>
+<main id="menu"></main>
+<button class="fab hide" id="fab"><span id="fabN"></span><span id="fabT"></span></button>
 
-<section class="hero">
-  <div class="hero-box">
-    <div>
-      <h2>الجوع ملوش حل؟<br><span>البوشو هو الحل!</span></h2>
-      <p>اختار أكلك المفضل من المنيو، ضيفه للسلة، واطلب بسهولة عن طريق واتساب.</p>
-      <button class="btn" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
-        اكتشف المنيو ↓
-      </button>
-    </div>
-    <img src="logo.png" alt="El Bosho">
+<div class="drawer" id="dr"><div class="sheet" role="dialog">
+  <h2><span data-t="cart"></span><button id="x" aria-label="close">✕</button></h2>
+  <div id="lines"></div>
+  <div class="tot"><span data-t="total"></span><span id="tot"></span></div>
+  <div class="seg"><button id="mDel" class="on" data-t="delivery"></button><button id="mPick" data-t="pickup"></button></div>
+  <input id="name" data-ph="name" autocomplete="name">
+  <input id="phone" type="tel" inputmode="tel" data-ph="phone" autocomplete="tel">
+  <div id="delBox">
+    <textarea id="addr" rows="2" data-ph="address"></textarea>
+    <button class="loc" id="locBtn" data-t="shareLoc"></button>
   </div>
-</section>
-
-<main class="wrap" id="menu">
-  <div class="toolbar">
-    <input id="search" type="search" placeholder="🔎 ابحث عن أكلك المفضل..."
-           oninput="renderMenu()">
-  </div>
-
-  <div class="categories" id="categories"></div>
-
-  <div class="layout">
-    <section>
-      <div class="section-title">
-        <h2 id="section-heading">كل الأصناف</h2>
-        <span id="item-count"></span>
-      </div>
-      <div class="products" id="products"></div>
-      <p class="notice">
-        الأسعار المعروضة بالجنيه المصري وفقاً للمنيو المرسل.
-        بعض أسماء الأصناف الصغيرة في الصور تحتاج مراجعة قبل النشر النهائي.
-      </p>
-    </section>
-
-    <aside class="cart" id="cart">
-      <h2>🛒 سلة طلباتك</h2>
-      <div id="cart-items" class="cart-items"></div>
-
-      <div class="totals">
-        <div class="total-row"><span>عدد القطع</span><strong id="qty-total">0</strong></div>
-        <div class="total-row final"><span>الإجمالي</span><strong id="grand-total">0 ج.م</strong></div>
-      </div>
-
-      <form id="checkout-form">
-        <input class="field" id="customer-name" required
-               placeholder="اسم العميل">
-        <input class="field" id="customer-phone" type="tel" required
-               placeholder="رقم الموبايل">
-        <textarea class="field" id="customer-address" rows="2" required
-                  placeholder="عنوان التوصيل بالتفصيل"></textarea>
-        <textarea class="field" id="customer-notes" rows="2"
-                  placeholder="ملاحظات إضافية (اختياري)"></textarea>
-        <button class="btn" type="submit">اطلب عبر واتساب ↗</button>
-        <p class="notice">
-          سيتم فتح واتساب برسالة جاهزة لمراجعتها وإرسالها للمطعم.
-          تكلفة التوصيل غير محسوبة؛ يرجى تأكيدها مع المطعم.
-        </p>
-      </form>
-    </aside>
-  </div>
-</main>
-
-<footer>
-  <strong>EL BOSHO | البوشو</strong><br>
-  للاستفسار والطلبات تواصل معنا عبر واتساب<br>
-  <a href="https://wa.me/201555137386" target="_blank" rel="noopener">
-    01555137386
-  </a>
-  <br>
-  <a href="https://www.facebook.com/share/1Lss34KGyG/"
-     target="_blank" rel="noopener">صفحتنا على فيسبوك</a>
-  <p>© <span id="year"></span> EL BOSHO — جميع الحقوق محفوظة</p>
-</footer>
+  <textarea id="note" rows="2" data-ph="note"></textarea>
+  <button class="send" id="send" data-t="send"></button>
+  <p class="msg" data-t="feeNote"></p>
+</div></div>
 
 <script>
-const WHATSAPP = "201555137386";
+/* ===== SETTINGS: change the restaurant WhatsApp number here (country code, no + or 0) ===== */
+const WA_NUMBER = "201030304499";
+const CUR = {ar:"ج", en:"EGP"};
 
-const menu = [
-  // ساندوتشات فراخ
-  {id:1,name:"استربس",price:110,cat:"ساندوتشات فراخ",icon:"🍗"},
-  {id:2,name:"بانيه",price:110,cat:"ساندوتشات فراخ",icon:"🥪"},
-  {id:3,name:"زنجر سبايسي",price:120,cat:"ساندوتشات فراخ",icon:"🌶️"},
-  {id:4,name:"فاهيتا",price:120,cat:"ساندوتشات فراخ",icon:"🍗"},
-  {id:5,name:"فراي حار",price:120,cat:"ساندوتشات فراخ",icon:"🌶️"},
-  {id:6,name:"شيش طاووق مشوي",price:110,cat:"ساندوتشات فراخ",icon:"🍢"},
-  {id:7,name:"صدور مشوية",price:120,cat:"ساندوتشات فراخ",icon:"🍗"},
-  {id:8,name:"تشيكن رانش",price:110,cat:"ساندوتشات فراخ",icon:"🥪"},
-  {id:9,name:"كوردن بلو",price:110,cat:"ساندوتشات فراخ",icon:"🥪"},
-
-  // ساندوتشات لحوم
-  {id:10,name:"كفتة على الفحم",price:110,cat:"ساندوتشات لحوم",icon:"🥩"},
-  {id:11,name:"سجق مشوي",price:110,cat:"ساندوتشات لحوم",icon:"🌭"},
-  {id:12,name:"هوت دوج",price:110,cat:"ساندوتشات لحوم",icon:"🌭"},
-  {id:13,name:"ميلانو",price:110,cat:"ساندوتشات لحوم",icon:"🥪"},
-  {id:14,name:"فاهيتا لحم",price:110,cat:"ساندوتشات لحوم",icon:"🥩"},
-  {id:15,name:"لحوم مدخنة",price:110,cat:"ساندوتشات لحوم",icon:"🥩"},
-
-  // الوجبات
-  {id:20,name:"فرخة مشوية على الفحم",price:340,cat:"وجبات",icon:"🍗"},
-  {id:21,name:"نصف فرخة مشوية على الفحم",price:190,cat:"وجبات",icon:"🍗"},
-  {id:22,name:"وجبة استربس",price:180,cat:"وجبات",icon:"🍟"},
-  {id:23,name:"وجبة كفتة مشوية",price:180,cat:"وجبات",icon:"🥩"},
-  {id:24,name:"وجبة شيش طاووق مشوي",price:180,cat:"وجبات",icon:"🍢"},
-  {id:25,name:"وجبة ميكس مشاوي",price:230,cat:"وجبات",icon:"🔥"},
-  {id:26,name:"وجبة ميكس الأكيل",price:280,cat:"وجبات",icon:"🍖"},
-
-  // البطاطس
-  {id:30,name:"بطاطس",price:50,cat:"بطاطس",icon:"🍟"},
-  {id:31,name:"بطاطس ميكس موتزاريلا",price:60,cat:"بطاطس",icon:"🧀"},
-  {id:32,name:"بطاطس شيدر",price:60,cat:"بطاطس",icon:"🍟"},
-  {id:33,name:"بطاطس شيدر هالبينو",price:70,cat:"بطاطس",icon:"🌶️"},
-  {id:34,name:"بطاطس مهروسة",price:80,cat:"بطاطس",icon:"🥔"},
-  {id:35,name:"بطاطس استربس",price:90,cat:"بطاطس",icon:"🍗"},
-  {id:36,name:"بطاطس هوت دوج",price:80,cat:"بطاطس",icon:"🌭"},
-  {id:37,name:"بطاطس سجق",price:80,cat:"بطاطس",icon:"🍟"},
-  {id:38,name:"بطاطس شيبس",price:90,cat:"بطاطس",icon:"🍟"},
-  {id:39,name:"بطاطس صدور مشوية",price:90,cat:"بطاطس",icon:"🍗"},
-  {id:40,name:"بطاطس ميكس جبن",price:80,cat:"بطاطس",icon:"🧀"},
-
-  // كريبات الجبن
-  {id:50,name:"ميكس جبن",price:110,cat:"كريبات الجبن",icon:"🧀"},
-  {id:51,name:"ميكس جبن بسطرمة",price:130,cat:"كريبات الجبن",icon:"🧀"},
-  {id:52,name:"بسطرمة وتركي وسلامي",price:140,cat:"كريبات الجبن",icon:"🥞"},
-  {id:53,name:"مارجريتا",price:110,cat:"كريبات الجبن",icon:"🍕"},
-  {id:54,name:"شيش ورومي",price:110,cat:"كريبات الجبن",icon:"🧀"},
-  {id:55,name:"موتزاريلا ورومي",price:110,cat:"كريبات الجبن",icon:"🧀"},
-  {id:56,name:"كيري بسطرمة",price:130,cat:"كريبات الجبن",icon:"🥞"},
-
-  // السلطات
-  {id:60,name:"سلطة سيزر",price:90,cat:"سلطات",icon:"🥗"},
-  {id:61,name:"سيزر ميكس جبن",price:110,cat:"سلطات",icon:"🥗"},
-  {id:62,name:"سلطة مارجريتا",price:100,cat:"سلطات",icon:"🥗"},
-  {id:63,name:"سلطة تركي مدخن",price:100,cat:"سلطات",icon:"🥗"},
-  {id:64,name:"سلطة سلامي مدخن",price:100,cat:"سلطات",icon:"🥗"},
-  {id:65,name:"سلطة كبيري بسطرمة",price:110,cat:"سلطات",icon:"🥗"}
+/* ===== MENU DATA: [arabic, english, price, isNew?, description] ===== */
+const MENU = [
+ {id:"chk",ic:"🥪",ar:"ساندوتشات ماريه فراخ",en:"Chicken Sandwiches",i:[
+  ["استربس","Strips",115],["بانيه","Panee",115],["زنجر سبايسي","Spicy Zinger",120],["فاهيتا","Fajita",120],["فراي حاي","Fry Hai",120],["شيش طاووق مشوي","Grilled Shish Tawook",115],["مدور مشوية","Grilled Madawar",120],["تشيكن رانش","Chicken Ranch",115],["كوردن بلو","Cordon Bleu",115]]},
+ {id:"meat",ic:"🥙",ar:"ساندوتشات ماريه لحوم",en:"Meat Sandwiches",i:[
+  ["كفتة عالفحم","Charcoal Kofta",115],["سجق مشوي","Grilled Sausage",115],["هوت دوج","Hot Dog",115],["ميلانو","Milano",115],["فاهيتا لحم","Beef Fajita",115],["لحوم مدخنة","Smoked Meats",115]]},
+ {id:"meal",ic:"🍗",ar:"الوجبات",en:"Meals",i:[
+  ["فرخة مشوية عالفحم","Whole Charcoal Chicken",340,0,"رز بسمتي + بطاطس + صوصات + مخلل + خضار مشوي","Basmati rice, fries, sauces, pickles, grilled veg"],
+  ["نص فرخة مشوية عالفحم","Half Charcoal Chicken",190,0,"رز بسمتي + بطاطس + صوصات + مخلل + خضار مشوي","Basmati rice, fries, sauces, pickles, grilled veg"],
+  ["وجبة استربس","Strips Meal",180,0,"رز بسمتي + 7 قطع استربس + صوصات + بطاطس + مخلل","Basmati rice, 7 strips, sauces, fries, pickles"],
+  ["وجبة كفتة مشوية عالفحم","Charcoal Kofta Meal",180,0,"رز بسمتي + 6 صوابع كفتة + صوصات + بطاطس + مخلل","Basmati rice, 6 kofta fingers, sauces, fries, pickles"],
+  ["وجبة شيش مشوي عالفحم","Charcoal Shish Meal",180,0,"رز بسمتي + 6 قطع شيش + صوصات + بطاطس + مخلل","Basmati rice, 6 shish pieces, sauces, fries, pickles"],
+  ["وجبة ميكس مشاوي","Mixed Grill Meal",230,0,"رز + 3 كفتة + 3 شيش + 3 سجق + 2 مدور مشوية + صوصات + بطاطس + مخلل","Rice, 3 kofta, 3 shish, 3 sausage, 2 grilled madawar, sauces, fries, pickles"],
+  ["وجبة ميكس الأكيل","Mix El Akeel Meal",280,0,"رز + 3 كفتة + 3 شيش + 3 سجق + 3 استربس + 2 مدور مشوية + صوصات + بطاطس + مخلل","Rice, 3 kofta, 3 shish, 3 sausage, 3 strips, 2 madawar, sauces, fries, pickles"]]},
+ {id:"qd",ic:"🧀",ar:"كساديا",en:"Quesadilla",i:[
+  ["كساديا ميكس جبن","Mixed Cheese Quesadilla",90],["كساديا ميكس جبن بسطرمة","Cheese & Pastrami Quesadilla",110],["كساديا مرجريتا","Margherita Quesadilla",100],["كساديا تركي مدخن","Smoked Turkey Quesadilla",100],["كساديا سلامي مدخن","Smoked Salami Quesadilla",100],["كساديا كيري بسطرمة","Kiri Pastrami Quesadilla",110]]},
+ {id:"qdc",ic:"🍗",ar:"كساديا فراخ",en:"Chicken Quesadilla",i:[
+  ["كساديا استربس","Strips Quesadilla",120,1],["كساديا شيش","Shish Quesadilla",120,1],["كساديا زنجر","Zinger Quesadilla",120,1],["كساديا فاهيتا","Fajita Quesadilla",120,1],["كساديا مدور","Madawar Quesadilla",120,1],["كساديا كوردن بلو","Cordon Bleu Quesadilla",120,1]]},
+ {id:"qdm",ic:"🍖",ar:"كساديا لحوم",en:"Meat Quesadilla",i:[
+  ["كساديا كفتة","Kofta Quesadilla",110,1],["كساديا سجق","Sausage Quesadilla",110,1],["كساديا برجر","Burger Quesadilla",110,1],["كساديا هوت دوج","Hot Dog Quesadilla",110,1],["كساديا ميلانو","Milano Quesadilla",110,1],["كساديا سجق بسطرمة","Sausage & Pastrami Quesadilla",110,1]]},
+ {id:"qdx",ic:"🌮",ar:"كساديا ميكسات",en:"Quesadilla Mixes",i:[
+  ["كساديا ميكس لحوم","Meat Mix Quesadilla",140,1],["كساديا ميكس فراخ","Chicken Mix Quesadilla",140,1],["كساديا ميكس مشاوي","Grill Mix Quesadilla",140,1],["كساديا ميكس لحوم مدخنة","Smoked Meat Mix Quesadilla",140,1]]},
+ {id:"cc",ic:"🧈",ar:"كريبات الجبن",en:"Cheese Crepes",i:[
+  ["ميكس جبن","Mixed Cheese",110],["ميكس جبن بسطرمة","Cheese & Pastrami",130],["بسطرمة وتركي وسلامي","Pastrami, Turkey & Salami",140],["مرجريتا","Margherita",110],["شيدر ورومي","Cheddar & Roumy",110],["موزاريلا ورومي","Mozzarella & Roumy",110],["كيري بسطرمة","Kiri Pastrami",130]]},
+ {id:"cf",ic:"🌯",ar:"كريبات الفراخ",en:"Chicken Crepes",i:[
+  ["استربس","Strips",130],["بانيه","Panee",130],["زنجر سبايسي","Spicy Zinger",140],["فاهيتا","Fajita",140],["فراي داي","Fry Day",150],["شيش طاووق","Shish Tawook",150],["مشوي مدور","Grilled Madawar",160],["تشيكن رانش","Chicken Ranch",140],["تشيكن باربيكيو","Chicken BBQ",140],["كوردن بلو","Cordon Bleu",140],["بيكاتا فراخ","Chicken Piccata",160,1]]},
+ {id:"cm",ic:"🥩",ar:"كريبات اللحوم",en:"Meat Crepes",i:[
+  ["كفتة مشوية","Grilled Kofta",140],["سجق مشوي","Grilled Sausage",140],["برجر مشوي","Grilled Burger",140],["هوت دوج","Hot Dog",130],["ميلانو","Milano",130],["فاهيتا لحم","Beef Fajita",150],["بسطرمة سوسيس","Pastrami Sausage",130],["سجق بسطرمة","Sausage & Pastrami",140],["بيكاتا لحمه","Beef Piccata",170,1]]},
+ {id:"mx",ic:"💥",ar:"كريبات الميكسات",en:"Mix Crepes",i:[
+  ["ميكس فراخ","Chicken Mix",160,0,"شيش عالفحم + استربس + بانيه","Charcoal shish, strips, panee"],
+  ["ميكس لحوم","Meat Mix",160,0,"كفتة عالفحم + سجق + برجر + هوت دوج","Charcoal kofta, sausage, burger, hot dog"],
+  ["ميكس مشاوي","Grill Mix",180,0,"شيش + كفتة + برجر + سجق + مدور","Shish, kofta, burger, sausage, madawar"],
+  ["تربو لحوم","Turbo Meat",190,0,"كفتة + سلامي + سجق + بسطرمة + برجر","Kofta, salami, sausage, pastrami, burger"],
+  ["فاير تشيكن","Fire Chicken",190,0,"زنجر + تركي + هالبينو + كوردن بلو","Zinger, turkey, jalapeno, cordon bleu"],
+  ["فرايد ميكس","Fried Mix",190,0,"كوردن برجر + استربس + حلقات بصل + موزاريلا استيكس","Cordon burger, strips, onion rings, mozzarella sticks"],
+  ["دونر كباب","Doner Kebab",200,0,"استربس + دونر كباب + هوت دوج + تركي مدخن","Strips, doner kebab, hot dog, smoked turkey"],
+  ["الفخامة","El Fakhama",190,0,"كفتة مشوية + استربس + سلامي + صوابع موزاريلا","Grilled kofta, strips, salami, mozzarella fingers"],
+  ["دايموند","Diamond",190,0,"مسحب بانيه + شيش + مشروم مكرمل + كوردن بلو + تركي مدخن","Panee, shish, caramelized mushroom, cordon bleu, smoked turkey"],
+  ["فري ميكس","Free Mix",190,0,"شيش + كفتة + مدور + هوت دوج + بسطرمة","Shish, kofta, madawar, hot dog, pastrami"],
+  ["قنبلة فراخ","Chicken Bomb",220,0,"شيش + استربس + بانيه + مسحب + مدور + بطاطس","Shish, strips, panee, madawar, fries"],
+  ["قنبلة لحوم","Meat Bomb",220,0,"كفتة + سجق + برجر + بسطرمة + هوت دوج + بطاطس","Kofta, sausage, burger, pastrami, hot dog, fries"],
+  ["قنبلة البوشو","El Bosho Bomb",240,0,"شيش + استربس + بانيه + مسحب + هوت دوج + سلامي + تركي + بطاطس","Shish, strips, panee, hot dog, salami, turkey, fries"],
+  ["كريب بيكاتا ميكس","Piccata Mix Crepe",190,1,"بيكاتا بالمشروم والكريمة اللبنى + استربس + حلقات بصل + كوردن برجر","Piccata with mushroom & cream, strips, onion rings, cordon burger"],
+  ["كريب كباب وكفتة","Kebab & Kofta Crepe",180,1,"كباب بلدي مشوي + كفتة + الفحم + صوص البوشو","Grilled kebab, kofta, El Bosho sauce"],
+  ["كريب خطفوني","Khatfony Crepe",190,1,"سجق مشوي + كوردن برجر + تركي مدخن + كوردن بلو + برجر لحمة","Grilled sausage, cordon burger, smoked turkey, cordon bleu, beef burger"]]},
+ {id:"pt",ic:"🥔",ar:"البطاطس",en:"Potatoes",i:[
+  ["بطاطس بهارات","Spiced Fries",50],["بطاطس ميكس مومات","Mix Momat Fries",60],["بطاطس شيدر","Cheddar Fries",60],["بطاطس شيدر هالبينو","Cheddar Jalapeno Fries",70],["بطاطس مفروم","Minced Meat Fries",80],["بطاطس استربس","Strips Fries",90],["بطاطس هوت دوج","Hot Dog Fries",80],["بطاطس سجق","Sausage Fries",80],["بطاطس شيش","Shish Fries",90],["بطاطس مدور مشوية","Grilled Madawar Fries",90],["بطاطس ميكس جبن","Mixed Cheese Fries",80]]},
+ {id:"ex",ic:"➕",ar:"الإضافات",en:"Extras",i:[
+  ["الكونو","Cono",25],["موزاريلا استيكس","Mozzarella Sticks",20],["تركي أو سلامي","Turkey or Salami",20],["بسطرمة","Pastrami",20],["مشروم","Mushroom",15],["هالبينو","Jalapeno",15],["مومات","Momat",15]]}
 ];
 
-let activeCategory = "الكل";
-let cart = {};
+const T={
+ ar:{brand:"البوشو",tag:"كريب ومشويات",addr:"قشلاق السواحل - أمام حديقة الأمل - بجوار كافيه 2WIX",search:"ابحث في المنيو...",add:"أضف",cart:"سلة الطلبات",total:"الإجمالي",delivery:"🛵 توصيل",pickup:"🏃 استلام من المطعم",name:"الاسم",phone:"رقم الموبايل",address:"العنوان بالتفصيل",note:"ملاحظات (اختياري)",shareLoc:"📍 شارك موقعي الحالي",send:"إرسال الطلب على واتساب",view:"عرض السلة",items:"صنف",feeNote:"رسوم التوصيل يحددها المطعم عند التأكيد.",empty:"السلة فارغة. اختر أصنافك من المنيو.",locOk:"✅ تم تحديد الموقع",locErr:"تعذر تحديد الموقع، اكتب العنوان بدل ذلك.",badPhone:"اكتب رقم موبايل صحيح",need:"الاسم والعنوان مطلوبان",new:"جديد"},
+ en:{brand:"EL BOSHO",tag:"Crepes & Grills",addr:"Qeshlaq El Sawahel, in front of Al Amal Park, next to 2WIX Cafe",search:"Search the menu...",add:"Add",cart:"Your order",total:"Total",delivery:"🛵 Delivery",pickup:"🏃 Pick up",name:"Name",phone:"Mobile number",address:"Full address",note:"Notes (optional)",shareLoc:"📍 Share my current location",send:"Send order on WhatsApp",view:"View cart",items:"items",feeNote:"The restaurant sets the delivery fee when confirming.",empty:"Your cart is empty. Pick something from the menu.",locOk:"✅ Location saved",locErr:"Could not get your location. Type your address instead.",badPhone:"Enter a valid mobile number",need:"Name and address are required",new:"NEW"}
+};
+const $=s=>document.querySelector(s);
+let lang=localStorage.lang||"ar", theme=localStorage.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
+let cart=JSON.parse(localStorage.cart||"{}"), mode="del", loc=null, filter="";
+const t=k=>T[lang][k], nm=x=>lang==="ar"?x[0]:x[1], ds=x=>lang==="ar"?x[4]:x[5];
+const flat={}; MENU.forEach(c=>c.i.forEach((x,n)=>flat[c.id+n]=x));
+const sum=()=>Object.entries(cart).reduce((s,[k,q])=>s+flat[k][2]*q,0);
+const cnt=()=>Object.values(cart).reduce((a,b)=>a+b,0);
+const fmt=n=>n+" "+CUR[lang];
 
-const money = n => n.toLocaleString("en-US") + " ج.م";
-
-function renderCategories(){
-  const cats = ["الكل",...new Set(menu.map(p=>p.cat))];
-  document.getElementById("categories").innerHTML = cats.map(cat=>`
-    <button class="category ${activeCategory===cat?"active":""}"
-      onclick="setCategory(${JSON.stringify(cat).replace(/"/g,'&quot;')})">
-      ${cat}
-    </button>`).join("");
+function render(){
+  document.documentElement.lang=lang; document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  document.documentElement.dataset.theme=theme;
+  $("#tTheme").textContent=theme==="dark"?"☀️":"🌙"; $("#tLang").textContent=lang==="ar"?"EN":"عربي";
+  document.querySelectorAll("[data-t]").forEach(e=>e.textContent=t(e.dataset.t));
+  document.querySelectorAll("[data-ph]").forEach(e=>e.placeholder=t(e.dataset.ph));
+  $("#nav").innerHTML=MENU.map(c=>`<a href="#${c.id}">${c.ic} ${c[lang]}</a>`).join("");
+  const f=filter.trim().toLowerCase();
+  $("#menu").innerHTML=MENU.map(c=>{
+    const its=c.i.map((x,n)=>[x,n]).filter(([x])=>!f||x[0].includes(f)||x[1].toLowerCase().includes(f));
+    if(!its.length)return"";
+    return `<section id="${c.id}"><h2>${c.ic} ${c[lang]}</h2><div class="grid">${its.map(([x,n])=>{
+      const k=c.id+n,q=cart[k]||0;
+      return `<div class="item"><h3>${nm(x)}${x[3]?`<span class="new">${t("new")}</span>`:""}</h3>${ds(x)?`<small>${ds(x)}</small>`:""}
+      <div class="row"><span class="price">${fmt(x[2])}</span>${q?`<span class="qty"><button data-d="-1" data-k="${k}">−</button>${q}<button data-d="1" data-k="${k}">+</button></span>`:`<button class="add" data-d="1" data-k="${k}">${t("add")}</button>`}</div></div>`}).join("")}</div></section>`}).join("")||`<p class="empty">—</p>`;
+  bar(); lines();
 }
-
-function setCategory(cat){
-  activeCategory = cat;
-  renderCategories();
-  renderMenu();
+function bar(pop){
+  const n=cnt(); $("#fab").classList.toggle("hide",!n);
+  $("#fabN").textContent=`🛒 ${t("view")} (${n} ${t("items")})`; $("#fabT").textContent=fmt(sum());
+  if(pop){$("#fab").classList.remove("pop");void $("#fab").offsetWidth;$("#fab").classList.add("pop")}
 }
-
-function renderMenu(){
-  const query = document.getElementById("search").value.trim().toLowerCase();
-  const items = menu.filter(p =>
-    (activeCategory==="الكل" || p.cat===activeCategory) &&
-    (p.name.toLowerCase().includes(query) || p.cat.toLowerCase().includes(query))
-  );
-
-  document.getElementById("section-heading").textContent = activeCategory==="الكل" ? "كل الأصناف" : activeCategory;
-  document.getElementById("item-count").textContent = items.length + " صنف";
-  document.getElementById("products").innerHTML = items.length ? items.map(p=>`
-    <article class="product">
-      <div class="food-icon">${p.icon}</div>
-      <h3>${p.name}</h3>
-      <div class="desc">${p.cat}</div>
-      <div class="product-bottom">
-        <span class="price">${money(p.price)}</span>
-        <button class="add" aria-label="أضف ${p.name}"
-          onclick="changeQty(${p.id},1)">+</button>
-      </div>
-    </article>`).join("") : '<p class="empty">لا توجد أصناف مطابقة للبحث.</p>';
+function lines(){
+  const e=Object.entries(cart);
+  $("#lines").innerHTML=e.length?e.map(([k,q])=>`<div class="line"><b>${nm(flat[k])}</b><span class="qty"><button data-d="-1" data-k="${k}">−</button>${q}<button data-d="1" data-k="${k}">+</button></span><span>${fmt(flat[k][2]*q)}</span></div>`).join(""):`<p class="empty">${t("empty")}</p>`;
+  $("#tot").textContent=fmt(sum());
 }
-
-function changeQty(id,delta){
-  const next = (cart[id]||0)+delta;
-  if(next<=0) delete cart[id];
-  else cart[id]=next;
-  renderCart();
+function change(k,d){
+  cart[k]=(cart[k]||0)+d; if(cart[k]<=0)delete cart[k];
+  localStorage.cart=JSON.stringify(cart); render(); bar(d>0);
+  if(!cnt())$("#dr").classList.remove("open");
 }
-
-function renderCart(){
-  const entries = Object.entries(cart);
-  let qty = 0, total = 0;
-
-  document.getElementById("cart-items").innerHTML = entries.length ? entries.map(([id,q])=>{
-    const p = menu.find(x=>x.id===Number(id));
-    qty += q;
-    total += p.price*q;
-    return `<div class="cart-item">
-      <div class="cart-item-top">
-        <span class="cart-item-name">${p.name}</span>
-        <button class="remove" onclick="changeQty(${p.id},-${q})">حذف</button>
-      </div>
-      <div class="qty">
-        <button onclick="changeQty(${p.id},-1)">−</button>
-        <span>${q}</span>
-        <button onclick="changeQty(${p.id},1)">+</button>
-        <span class="price">${money(p.price*q)}</span>
-      </div>
-    </div>`;
-  }).join("") : '<div class="empty">السلة لسه فاضية 🍽️<br>اختار أكلك وضيفه هنا.</div>';
-
-  document.getElementById("cart-count").textContent=qty;
-  document.getElementById("qty-total").textContent=qty;
-  document.getElementById("grand-total").textContent=money(total);
-}
-
-document.getElementById("checkout-form").addEventListener("submit",function(e){
-  e.preventDefault();
-  const entries = Object.entries(cart);
-  if(!entries.length){
-    alert("من فضلك أضف صنفاً إلى السلة أولاً.");
-    return;
-  }
-
-  const name = document.getElementById("customer-name").value.trim();
-  const phone = document.getElementById("customer-phone").value.trim();
-  const address = document.getElementById("customer-address").value.trim();
-  const notes = document.getElementById("customer-notes").value.trim();
-
-  let total=0;
-  const lines=entries.map(([id,q])=>{
-    const p=menu.find(x=>x.id===Number(id));
-    total+=p.price*q;
-    return `• ${p.name} × ${q} = ${p.price*q} جنيه`;
-  });
-
-  const message=[
-    "🔥 *طلب جديد من موقع البوشو*",
-    "",
-    `👤 الاسم: ${name}`,
-    `📱 الهاتف: ${phone}`,
-    `📍 العنوان: ${address}`,
-    "",
-    "*تفاصيل الطلب:*",
-    ...lines,
-    "",
-    `💰 *الإجمالي: ${total} جنيه*`,
-    "🚚 تكلفة التوصيل: يرجى التأكيد مع المطعم",
-    notes ? `📝 ملاحظات: ${notes}` : "",
-    "",
-    "يرجى تأكيد الطلب والتكلفة النهائية."
-  ].filter(Boolean).join("\n");
-
-  const whatsappUrl =
-  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
-
-const whatsappWindow = window.open(
-  whatsappUrl,
-  "_blank"
-);
-
-if (whatsappWindow) {
-  cart = {};
-  renderCart();
-  document.getElementById("checkout-form").reset();
-}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-k]"); if(b)change(b.dataset.k,+b.dataset.d);
 });
-
-document.getElementById("year").textContent=new Date().getFullYear();
-renderCategories();
-renderMenu();
-renderCart();
+$("#q").addEventListener("input",e=>{filter=e.target.value;render()});
+$("#tTheme").onclick=()=>{theme=theme==="dark"?"light":"dark";localStorage.theme=theme;render()};
+$("#tLang").onclick=()=>{lang=lang==="ar"?"en":"ar";localStorage.lang=lang;render()};
+$("#fab").onclick=()=>$("#dr").classList.add("open");
+$("#x").onclick=()=>$("#dr").classList.remove("open");
+$("#dr").onclick=e=>{if(e.target.id==="dr")$("#dr").classList.remove("open")};
+function setMode(m){mode=m;$("#mDel").classList.toggle("on",m==="del");$("#mPick").classList.toggle("on",m==="pick");$("#delBox").style.display=m==="del"?"block":"none"}
+$("#mDel").onclick=()=>setMode("del"); $("#mPick").onclick=()=>setMode("pick");
+$("#locBtn").onclick=()=>{
+  navigator.geolocation?navigator.geolocation.getCurrentPosition(p=>{loc=`https://maps.google.com/?q=${p.coords.latitude},${p.coords.longitude}`;$("#locBtn").textContent=t("locOk")},()=>alert(t("locErr")),{enableHighAccuracy:true,timeout:10000}):alert(t("locErr"));
+};
+$("#send").onclick=()=>{
+  const name=$("#name").value.trim(), phone=$("#phone").value.replace(/[\s-]/g,""), addr=$("#addr").value.trim();
+  $("#phone").classList.toggle("bad",!/^(\+?20|0)?1[0-25]\d{8}$/.test(phone)&&!/^\+?\d{9,15}$/.test(phone));
+  if(!cnt())return;
+  if($("#phone").classList.contains("bad"))return alert(t("badPhone"));
+  if(!name||(mode==="del"&&!addr&&!loc))return alert(t("need"));
+  // The order message is always in Arabic so the restaurant can read it
+  let m=`*طلب جديد - البوشو*\n\n`;
+  Object.entries(cart).forEach(([k,q])=>m+=`• ${flat[k][0]} × ${q} = ${flat[k][2]*q} ج\n`);
+  m+=`\n*الإجمالي: ${sum()} ج* (بدون رسوم التوصيل)\n\n`;
+  m+=`الاسم: ${name}\nالموبايل: ${phone}\nنوع الطلب: ${mode==="del"?"توصيل":"استلام من المطعم"}\n`;
+  if(mode==="del"){if(addr)m+=`العنوان: ${addr}\n`;if(loc)m+=`الموقع: ${loc}\n`}
+  const note=$("#note").value.trim(); if(note)m+=`ملاحظات: ${note}\n`;
+  open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(m)}`,"_blank");
+};
+/* 3D tilt on cards (mouse only) */
+document.addEventListener("mousemove",e=>{
+  const c=e.target.closest(".item"); document.querySelectorAll(".item").forEach(i=>{if(i!==c)i.style.transform=""});
+  if(!c)return; const r=c.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  c.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg) translateZ(8px)`;
+});
+render(); setMode("del");
 </script>
 </body>
 </html>
