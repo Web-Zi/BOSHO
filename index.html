@@ -233,7 +233,15 @@ $("#send").onclick=()=>{
   m+=`الاسم: ${name}\nالموبايل: ${phone}\nنوع الطلب: ${mode==="del"?"توصيل":"استلام من المطعم"}\n`;
   if(mode==="del"){if(addr)m+=`العنوان: ${addr}\n`;if(loc)m+=`الموقع: ${loc}\n`}
   const note=$("#note").value.trim(); if(note)m+=`ملاحظات: ${note}\n`;
-  open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(m)}`,"_blank");
+    open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(m)}`,"_blank");
+  // clear everything after sending
+  cart={}; localStorage.cart="{}"; loc=null;
+  ["#name","#phone","#addr","#note"].forEach(s=>$(s).value="");
+  $("#phone").classList.remove("bad");
+  $("#locBtn").textContent=t("shareLoc");
+  setMode("del");
+  $("#dr").classList.remove("open");
+  render();
 };
 /* 3D tilt on cards (mouse only) */
 document.addEventListener("mousemove",e=>{
